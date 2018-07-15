@@ -10,6 +10,7 @@ public class Result {
     private int resultCode;
     private String resultMessage;
     private boolean success;
+    private Object data;
 
     public static Result getSuccessResult() {
         Result result = new Result();
@@ -17,10 +18,18 @@ public class Result {
         return result;
     }
 
+    public static Result getSuccessResult(Object data) {
+        Result result = new Result();
+        result.setSuccess(true);
+        result.setData(data);
+        return result;
+    }
+
     public static Result getErrorResult(int code, String message) {
         Result result = new Result();
         result.setSuccess(false);
         result.setResultCode(code);
+        result.setResultMessage("success");
         result.setResultMessage(message);
         return result;
     }

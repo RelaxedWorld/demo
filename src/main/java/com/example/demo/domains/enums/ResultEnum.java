@@ -2,7 +2,7 @@ package com.example.demo.domains.enums;
 
 public enum ResultEnum {
     USER_NOT_EXIT(3000,"用户不存在"),
-    USERID_NOT_NULL(3001,"用户id不能为空."),
+    USERNAME_NOT_NULL(3001,"用户名不能为空."),
     LOGIN_TOKEN_NOT_NULL(3002,"登录token不能为空."),
     USERID_NOT_UNAUTHORIZED(3003, "用户token或ID验证不通过"),
     RESPONSE_CODE_UNLOGIN_ERROR(421, "未登录异常"),
