@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.model.User;
 import com.example.demo.domains.Result;
-import com.example.demo.domains.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

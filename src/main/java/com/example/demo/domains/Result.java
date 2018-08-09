@@ -21,6 +21,7 @@ public class Result {
     public static Result getSuccessResult(Object data) {
         Result result = new Result();
         result.setSuccess(true);
+        result.setResultMessage("success");
         result.setData(data);
         return result;
     }
@@ -29,7 +30,6 @@ public class Result {
         Result result = new Result();
         result.setSuccess(false);
         result.setResultCode(code);
-        result.setResultMessage("success");
         result.setResultMessage(message);
         return result;
     }

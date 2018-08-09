@@ -1,26 +1,25 @@
 package com.example.demo.controller;
 
+import com.example.demo.constants.BaseConstants;
 import com.example.demo.domains.Result;
-import com.example.demo.service.impl.UserServiceImpl;
+import com.example.demo.service.UserService;
+import com.example.demo.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @PostMapping("/login")
-    @ResponseBody
     public Result userLogin(String userName, String userPwd,
                             HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -33,18 +32,16 @@ public class UserController {
     }
 
     @RequestMapping("/logout")
-    @ResponseBody
     public String logout(HttpServletRequest request) {
         userService.logout(request); // 思路是从Redis中删除key，实际情况请和业务逻辑结合
         return "index";
     }
 
-    @RequestMapping("/token/{token}")
-    @ResponseBody
-    public Object getUserByToken(@PathVariable String token) {
+    @RequestMapping("/userInfo")
+    public Result getUserByToken(HttpServletRequest request) {
         Result result = null;
         try {
-            result = userService.queryUserByToken(token);
+            result = userService.queryUserByToken(CookieUtils.getCookieValue(request, BaseConstants.TOKEN));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.getErrorResult(500, e.getMessage());

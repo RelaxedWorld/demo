@@ -23,7 +23,7 @@ public class CookieUtils {
      */
     public static Cookie getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
-        if (cookies.length < 1) {
+        if (cookies == null || cookies.length < 1) {
             return null;
         }
         Cookie cookie = null;
